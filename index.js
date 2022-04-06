@@ -80,17 +80,19 @@ class PersonTreeNode {
     this.right = null;
   }
 
+  logThis(){
+    console.log(`|| this >`, this);
+  }
+
   add(person){
-    if (person.name > this.name){
+    if (person.person.name > this.value){
       if (!this.right){
         this.right = person;
       } else {
         this.right.add(person);
       }
-    }
-
-    if (person.name < this.name){
-      if (!this.left){
+    } else if (person.person.name < this.value){
+      if(!this.left){
         this.left = person;
       } else {
         this.left.add(person)
@@ -117,9 +119,29 @@ const jones = new PersonTreeNode({
     address: '123 Main St' 
   })
 
+const brook = new PersonTreeNode({ 
+    name: 'Brook', 
+    phone: '123-4568', 
+    address: '666 Pit of Fire st' 
+  })
+
+const smith = new PersonTreeNode({ 
+    name: 'Smith', 
+    phone: '999-1111', 
+    address: '987 se 6th ave' 
+  })
+
+const nelson = new PersonTreeNode({ 
+    name: 'Nelson', 
+    phone: '555-5555', 
+    address: '13013 se Bob st' 
+  })
+
+ 
   jones.add(brook);
   jones.add(smith);
   jones.add(nelson);
-
+  
   console.log(jones.getPerson('Nelson'));
   console.log(jones.getPerson('Smith'));
+  console.log(jones.getPerson('Brook'));
