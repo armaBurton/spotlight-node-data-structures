@@ -85,31 +85,41 @@ class PersonTreeNode {
   }
 
   add(person){
-    if (person.person.name > this.value){
-      if (!this.right){
-        this.right = person;
-      } else {
-        this.right.add(person);
-      }
-    } else if (person.person.name < this.value){
-      if(!this.left){
-        this.left = person;
-      } else {
-        this.left.add(person)
-      }
-    }
+    const dir = (person.person.name > this.value) ? 'right' : 'left';
+    return !this[dir] ? this[dir] = person : this[dir].add(person);
+
+    // if (person.person.name > this.value){
+    //   if (!this.right){
+    //     this.right = person;
+    //   } else {
+    //     this.right.add(person);
+    //   }
+    // } else if (person.person.name < this.value){
+    //   if(!this.left){
+    //     this.left = person;
+    //   } else {
+    //     this.left.add(person)
+    //   }
+    // }
   }
 
   getPerson(name){
     if (this.value === name){
       return this.person;
-    } else if (name < this.value){
-      if(!this.left) return null;
-      return this.left.getPerson(name);
-    } else if (name > this.value){
-      if(!this.right) return null;
-      return this.right.getPerson(name);
     }
+
+    const dir = (name > this.value) ? 'right' : 'left';
+    return !this[dir] ? null : this[dir].getPerson(name);
+
+    // if (this.value === name){
+    //   return this.person;
+    // } else if (name < this.value){
+    //   if(!this.left) return null;
+    //   return this.left.getPerson(name);
+    // } else if (name > this.value){
+    //   if(!this.right) return null;
+    //   return this.right.getPerson(name);
+    // }
   }
 };
 
